@@ -22,7 +22,7 @@ A comprehensive **Data Engineering and Analytics** project aimed at building a m
 
 The pipeline follows the **Medallion Architecture** (Bronze-Silver-Gold) implemented on the Azure Lakehouse, ensuring data reliability and efficiency from ingestion to consumption.
 
-**<img src = "Images\ image(8)">**
+**<img src = "Images/image (8).png">**
 
 ### 1. Data Ingestion (Source → Bronze Layer)
 
