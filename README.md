@@ -17,29 +17,59 @@ A comprehensive **Data Engineering and Analytics** project aimed at building a m
 | **Visualization** | **Microsoft Power BI** | Professional, real-time dashboarding for operational monitoring. |
 
 ---
+## 💻 Data Generation Output & Raw Data Structure
 
+This section demonstrates the successful execution of the data simulation code and the format of the raw data as it enters the pipeline.
+
+### 1. Source Data Simulation (Code Results)
+
+A screenshot of the Python/PySpark notebook output demonstrating the continuous generation of fake patient data records.
+
+**<img src = "Images/Pushing Data.png">**
+
+### 2. Event Hub Raw Data Format
+
+The structure of the raw event messages ingested into Azure Event Hub. This shows the immediate schema of the streaming data.
+
+**<img src = "Images/Data_Eventhub.png">**
+
+---
 ## 🏗️ Technical Architecture & Data Pipeline
 
 The pipeline follows the **Medallion Architecture** (Bronze-Silver-Gold) implemented on the Azure Lakehouse, ensuring data reliability and efficiency from ingestion to consumption.
 
-**<img src = "Images/image (8).png">**
+**<img src = "Images/Pipeline.png">**
 
 ### 1. Data Ingestion (Source → Bronze Layer)
 
+<img src = "Images/Pushing Data.png">
+
 * **Source to Event Hub:** New patient admission/discharge data is generated and streamed into **Azure Event Hub**.
 * **Bronze Layer:** A Databricks job consumes the events and writes the data **raw and untouched** to the Data Lake Storage.
+  
+### 2. Bronze Layer Storage Format
 
-### 2. Data Processing (Silver → Gold Layers)
+The raw data is stored in the Data Lake in its original format (e.g., JSON or CSV format, typically partitioned).
+
+**<img src = "Images/Data_blob storage.png">**
+
+### 3. Orchestration Pipeline (Azure Data Factory)
+
+The entire process is automated via Azure Data Factory pipelines, ensuring the Silver and Gold layers are updated hourly.
+
+**<img src = "Images/Azure_Datafactory.png">**
+
+### 4. Data Processing (Silver → Gold Layers)
 
 * **Silver Layer:** Cleansed, validated, and normalized data is created to serve as the unified, single source of truth.
 * **Gold Layer:** **12 highly optimized views** (Data Marts) are pre-calculated to serve the Power BI report directly, ensuring high performance.
 
-### 3. Alerting & Automation
+### 5. Alerting & Automation
 
 * **Critical Metric:** The system continuously monitors the `current_active_patients_gold` metric.
 * **Action:** If the count of active patients **exceeds 200**, the **Azure Logic App** is instantly triggered to send a critical alert notification.
 
-**[Image Placeholder: Insert the Logic App email alert screenshot here]**
+**<img src = "Images/Email.png">**
 
 ---
 
@@ -62,11 +92,14 @@ The Gold layer contains 12 highly optimized SQL Views used to power the single L
 | `hospital_performance_gold` | Comparative table showing admissions and average stay across all hospitals. | Used for comparative review (if a drill-through page is later implemented). |
 | `Num_patients_by_age_gold` | Patient count broken down by individual age. | Granular demographic analysis. |
 
+**<img src = "Images/Schema.png">**
 ---
 
 ## 📈 Power BI Report Overview (Live Operations Dashboard)
 
-The final report consists of a **single, unified Live Operations Dashboard**. It is designed with a **Dark Mode Theme** to ensure maximum visibility for the critical alert status.
+The final report consists of a **single, unified Live Operations Dashboard**. It is designed with a **Light Mode Theme** to ensure maximum visibility for the critical alert status.
+
+<img src = "Images/Power BI Design.png">
 
 * **Title:** **Live Operations** (The Real-time Control Center).
 * **KPI Cards:** Displays aggregated figures such as **Sum of avg_los_hours (75)**, **Sum of num_admissions (384)**, and the **Busiest Department (Emergency)**.
