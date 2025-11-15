@@ -31,7 +31,7 @@ A screenshot of the Python/PySpark notebook output demonstrating the continuous 
 
 The structure of the raw event messages ingested into Azure Event Hub. This shows the immediate schema of the streaming data.
 
-**<img src = "Images/Data_Eventhub.png">**
+
 
 ---
 ## 🏗️ Technical Architecture & Data Pipeline
@@ -42,7 +42,7 @@ The pipeline follows the **Medallion Architecture** (Bronze-Silver-Gold) impleme
 
 ### 1. Data Ingestion (Source → Bronze Layer)
 
-<img src = "Images/Pushing Data.png">
+**<img src = "Images/Data_Eventhub.png">**
 
 * **Source to Event Hub:** New patient admission/discharge data is generated and streamed into **Azure Event Hub**.
 * **Bronze Layer:** A Databricks job consumes the events and writes the data **raw and untouched** to the Data Lake Storage.
