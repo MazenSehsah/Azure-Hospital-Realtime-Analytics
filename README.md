@@ -31,7 +31,7 @@ A screenshot of the Python/PySpark notebook output demonstrating the continuous 
 
 The structure of the raw event messages ingested into Azure Event Hub. This shows the immediate schema of the streaming data.
 
-
+**<img src = "Images/Schema_data.png">**
 
 ---
 ## 🏗️ Technical Architecture & Data Pipeline
